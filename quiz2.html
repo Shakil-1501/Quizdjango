@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz</title>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+<body>
+ 
+    <center>
+        <h2> Session 3 - Quiz   </h2>
+      </center>
+        <left>
+        <hr>
+        <p style='margin-left:10px'> <b>Points</b>{{quizs.points}}   &nbsp;&nbsp; <b>Questions {{quizs.Questions}} </b>   </p>
+         
+        <center>
+          {% if quizs.chooseview == 'All question at a time' %}
+            <a href="{% url 'lms:fetch_questions' %}" ><button class="btn btn-success"  id="previewbtn" type="submit";>Start</button></a>
+          {% else %}
+            <a href="{% url 'lms:fetch_questions_oneatatime' %}" ><button class="btn btn-success"  id="previewbtn" type="submit";>Start</button></a>
+          {% endif %}
+        </center>
+        <div id="xyz"> 
+         <form>
+           <labels style='margin-left:10px'><b> Time Limit</b> </labels>
+           <select name="minutes" id="minutes">
+            <option value="volvo">15 minutes </option>
+            <option value="saab">30 minutes</option>
+            <option value="opel">60 minutes</option>
+            <option value="audi">90 minutes</option>
+          </select>
+
+    
+</body>
+</html>
