@@ -50,8 +50,7 @@ def fetch_questions(request):
     return render(request,'lms/course/quiz3.html',context)
 
 
-def compute_html(request):
-    return render(request,'lms/course/a.html')    
+    
 
 def fetch_questions_oneatatime(request):
     obj = Question.objects.all()
@@ -99,6 +98,7 @@ def compute_stats(request):
     context.update(Profile.objects.all().aggregate(Avg('marks')))
     context.update(Profile.objects.all().aggregate(Min('marks')))
     context.update(Profile.objects.all().aggregate(Max('marks')))
+    context.update(Profile.objects.all().aggregate(Avg('Time_taken')))
     
     return render(request,'lms/course/course.html',context)
 
@@ -107,8 +107,9 @@ def enter_comment(request):
     responses = Responses.objects.all()
     context = {'responses':responses}
     if request.method == "POST":
-       responses = Responses()
-       responses.comments = request.POST['comments']
+       
+       comments = request.POST.get['comments']
+       responses = Responses(comments=comments)
        responses.save()
        return render(request,'lms/course/responses.html')
     else:

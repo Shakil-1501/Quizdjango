@@ -64,35 +64,28 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.
           
      
    <center>
-     <h2> Session 3 - Quiz   </h2>
+     <h2> {{quizs.Quizname}} - Quiz   </h2>
    </center>
      <left>
      <hr>
      
      <p style='margin-left:10px'> <b>Points</b>{{quizs.points}}   &nbsp;&nbsp; <b>Questions {{quizs.Questions}} </b>   </p> 
-      
+     <p style='margin-left:10px'><b> Time Limit</b> &nbsp;{{quizs.Timelimit}} &nbsp;minutes</p> 
      <a href="{% url 'lms:preview_quiz' %}" ><button class="btn-btn-primary" style="float:right" id="previewbtn" type="submit";>Preview</button></a>
      <button class="btn-btn-primary" style="float:right ;margin-right:10px;">Publish</button>
+     
      <div id="xyz"> 
       <form>
-        <labels style='margin-left:10px'><b> Time Limit</b> </labels>
-        <select name="minutes" id="minutes">
-         <option value="volvo">15 minutes </option>
-         <option value="saab">30 minutes</option>
-         <option value="opel">60 minutes</option>
-         <option value="audi">90 minutes</option>
-       </select>
+        
+        
       </form>
       <br>
         <div class='col-sm-3'>
           <div class="form-group">
              <label class="control-label" style="float:left">Available From &nbsp;</label>
-             <div class='input-group date' id='datetimepicker1'>
-                <input type='text' class="form-control" />
-                <span class="input-group-addon">
-                <span class="glyphicon glyphicon-calendar"></span>
-                </span>
-             </div>
+             <p>{{quizs.Availablefrom}}</p>
+             <label class="control-label" style="float:left">Until &nbsp;</label>
+             <p>{{quizs.Until}}</p>
           </div>
        </div>
     </div>
@@ -104,6 +97,31 @@ href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.
 
             
     </left>
+
+    <p id='limit' style="float:right;display:none">{{quizs.Timelimit}}</p> <br />
+        <p id='countdown' style="float:right";>0:0</p>
+        <script type="text/javascript">
+            const startingMinutes = document.getElementById('limit').innerHTML;
+            let time = startingMinutes * 60;
+            const countDownEl = document.getElementById("countdown");
+            setInterval( updateCountdown, 1000);
+            function updateCountdown() {
+                const minutes = Math.floor( time/60 )
+                let seconds = time % 60;
+                if ( time > 0) {
+                    seconds = seconds < 10 ? '0'+seconds : seconds;
+                    countDownEl.innerHTML = `${minutes}:${seconds}`;
+                    time--;
+                }
+                if( time == 0){
+                    countDownEl.innerHTML = "Time Out";
+                    alert("Time is up");
+                    document.location.href="/";
+                }
+            }
+        </script>
+     <br>
+      </br>
 
     
     <a href="{% url 'lms:compute_stats' %}" ><button class="btn btn-success pull-right" style="float:right" id="previewbtn" type="submit";>Moderate Quiz tab</button></a>

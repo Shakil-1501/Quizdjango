@@ -14,7 +14,7 @@ class Profile(models.Model):
     marks = models.IntegerField(default=10)
     number_of_attempts = models.IntegerField(default=2)
     Attempts_left = models.IntegerField(default=1)
-    #Time_taken = models.IntegerField(default=30)
+    Time_taken = models.IntegerField(default=30)
     
 
     def __str__(self):

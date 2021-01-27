@@ -24,7 +24,8 @@ class Quiz(models.Model):
     Availablefrom = models.DateTimeField(blank=True)
     Until = models.DateTimeField(blank=True)
     points = models.IntegerField(blank=True)
-    Questions = models.IntegerField(blank=True) 
+    Questions = models.IntegerField(blank=True)
+    Timelimit = models.IntegerField(blank=True)
 
 
 
@@ -59,6 +60,8 @@ class Responses(models.Model):
     student = models.ForeignKey(User, on_delete=models.CASCADE)
     Questionid=models.ForeignKey(Question,on_delete=models.CASCADE)
     answer=models.IntegerField(blank=True)
+    points= models.IntegerField(blank=True)
+    score= models.IntegerField(blank=True)
     comments=models.TextField(max_length=1000,blank=True)
 
 
